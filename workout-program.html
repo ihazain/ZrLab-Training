@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Program Overview</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg:#f2f2f0; --surface:#e8e8e5; --border:#d4d4d0;
+  --text:#111111; --muted:#666660; --body:#333330;
+  --card:#ffffff; --accent:#111111;
+  --rest:#eeede9; --rest-text:#aaa;
+  --done-border:#111; --done-opacity:.5;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;min-height:100vh;}
+
+.prog{max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+
+/* ── Header ── */
+.prog-back{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);cursor:pointer;margin-bottom:1rem;display:inline-block;letter-spacing:.04em;}
+.prog-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
+.prog-title{font-size:1.8rem;font-weight:500;color:var(--text);letter-spacing:-.02em;line-height:1.2;}
+.prog-desc{font-size:.9rem;color:var(--muted);font-weight:300;margin-top:.4rem;line-height:1.5;max-width:560px;}
+
+/* ── Stats row ── */
+.prog-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:1.5rem 0;}
+.prog-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;}
+.prog-stat-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.prog-stat-val{font-size:1.3rem;font-weight:500;color:var(--text);}
+.prog-stat-unit{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:1px;}
+
+/* ── Overall progress ── */
+.prog-progress{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.prog-prog-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.prog-prog-fill{height:100%;background:var(--accent);border-radius:2px;width:0%;transition:width .5s;}
+.prog-prog-txt{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;}
+
+/* ── Weeks grid ── */
+.prog-weeks{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+.prog-week{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--card);}
+.prog-week.week-done{border-color:var(--accent);opacity:var(--done-opacity);}
+.prog-week.week-active{border-color:var(--accent);border-width:1.5px;}
+
+.prog-week-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;user-select:none;transition:background .15s;}
+.prog-week-hd:hover{background:var(--bg);}
+
+.prog-week-left{display:flex;align-items:center;gap:10px;}
+.prog-week-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;color:var(--muted);width:28px;}
+.prog-week.week-active .prog-week-num{color:var(--accent);}
+.prog-week-name{font-size:.88rem;font-weight:500;color:var(--text);}
+.prog-week-meta{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:2px;}
+
+.prog-week-right{display:flex;align-items:center;gap:8px;}
+.prog-week-badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;background:var(--surface);color:var(--muted);padding:2px 7px;border-radius:3px;}
+.prog-week-arrow{font-size:.68rem;color:var(--muted);transition:transform .2s;}
+.prog-week.open .prog-week-arrow{transform:rotate(180deg);}
+
+.prog-week-body{display:none;border-top:1px solid var(--border);}
+.prog-week.open .prog-week-body{display:block;}
+
+/* ── Days grid inside week ── */
+.prog-days{display:grid;grid-template-columns:repeat(7,1fr);}
+
+.prog-day{padding:9px 7px;border-right:1px solid var(--border);min-height:72px;cursor:pointer;transition:background .15s;position:relative;}
+.prog-day:last-child{border-right:none;}
+.prog-day:hover{background:var(--bg);}
+.prog-day.day-rest{background:var(--rest);cursor:default;}
+.prog-day.day-rest:hover{background:var(--rest);}
+
+.prog-day-name{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+.prog-day-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-bottom:4px;}
+.prog-day.day-rest .prog-day-dot{background:var(--rest-text);}
+.prog-day-workout{font-size:.72rem;font-weight:500;color:var(--text);line-height:1.3;margin-bottom:2px;}
+.prog-day-detail{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted);line-height:1.4;}
+.prog-day-rest-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--rest-text);margin-top:6px;font-style:italic;}
+
+.prog-day-link{position:absolute;bottom:6px;right:7px;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--muted);opacity:0;transition:opacity .15s;}
+.prog-day:hover .prog-day-link{opacity:1;}
+
+/* ── Done banner ── */
+.prog-done{display:none;text-align:center;padding:2rem 1rem;border:1px solid var(--border);border-radius:12px;margin-top:1rem;background:var(--card);}
+.prog-done.show{display:block;}
+.prog-done-mark{width:36px;height:36px;border-radius:50%;background:var(--accent);margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;}
+.prog-done-title{font-size:1.1rem;font-weight:500;color:var(--text);}
+.prog-done-sub{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:4px;letter-spacing:.04em;}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .prog-weeks{grid-template-columns:1fr;}
+  .prog-stats{grid-template-columns:repeat(2,1fr);}
+  .prog-days{grid-template-columns:repeat(7,1fr);}
+  .prog-day{padding:6px 4px;min-height:60px;}
+  .prog-day-workout{font-size:.65rem;}
+  .prog-day-detail{display:none;}
+}
+@media(max-width:400px){
+  .prog{padding:1.25rem .85rem 4rem;}
+  .prog-title{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="prog">
+
+  <div class="prog-back">← Programs</div>
+  <div class="prog-label">ZR Lab Pro · 8-Week Program</div>
+  <div class="prog-title">Return to Strength</div>
+  <div class="prog-desc">Foundation phase focusing on compound strength and hypertrophy. 5 sessions per week with progressive overload.</div>
+
+  <div class="prog-stats">
+    <div class="prog-stat">
+      <div class="prog-stat-label">Duration</div>
+      <div class="prog-stat-val">8</div>
+      <div class="prog-stat-unit">weeks</div>
+    </div>
+    <div class="prog-stat">
+      <div class="prog-stat-label">Sessions</div>
+      <div class="prog-stat-val">40</div>
+      <div class="prog-stat-unit">total</div>
+    </div>
+    <div class="prog-stat">
+      <div class="prog-stat-label">Per week</div>
+      <div class="prog-stat-val">5</div>
+      <div class="prog-stat-unit">days</div>
+    </div>
+    <div class="prog-stat">
+      <div class="prog-stat-label">Focus</div>
+      <div class="prog-stat-val" style="font-size:.9rem;margin-top:3px;">Strength</div>
+      <div class="prog-stat-unit">+ Hypertrophy</div>
+    </div>
+  </div>
+
+  <div class="prog-progress">
+    <div class="prog-prog-bar"><div class="prog-prog-fill" id="progFill"></div></div>
+    <div class="prog-prog-txt" id="progTxt">Week 0 / 8</div>
+  </div>
+
+  <div class="prog-weeks" id="weeks"></div>
+  <div class="prog-done" id="doneBanner">
+    <div class="prog-done-mark">✓</div>
+    <div class="prog-done-title">Program complete</div>
+    <div class="prog-done-sub">Return to Strength · 8 weeks · 40 sessions</div>
+  </div>
+
+</div>
+
+<script>
+var DAYS = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+
+/* ── PROGRAM DATA ──────────────────────────────────────────
+   Edit this object to define your 8-week program.
+   Each week has 7 days (index 0=Mon … 6=Sun).
+   rest:true  → rest day (grey, not clickable)
+   url:''     → link to published Joplin workout note
+──────────────────────────────────────────────────────── */
+var PROGRAM = {
+  1: {
+    name: 'Foundation',
+    type: 'Strength',
+    days: [
+      {n:'Upper Power',  d:'5x5 Bench · Row · OHP', rest:false, url:'#'},
+      {n:'Lower Power',  d:'5x5 Squat · RDL',        rest:false, url:'#'},
+      {n:'',             d:'',                         rest:true},
+      {n:'Upper Hyp.',   d:'4x10 Chest · Back',       rest:false, url:'#'},
+      {n:'Lower Hyp.',   d:'4x10 Legs · Core',        rest:false, url:'#'},
+      {n:'Conditioning', d:'3×15min HIIT',             rest:false, url:'#'},
+      {n:'',             d:'',                         rest:true},
+    ]
+  },
+  2: {
+    name: 'Foundation +',
+    type: 'Strength',
+    days: [
+      {n:'Upper Power',  d:'5x5 +2.5kg',        rest:false, url:'#'},
+      {n:'Lower Power',  d:'5x5 +5kg Squat',    rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+      {n:'Upper Hyp.',   d:'4x12 Chest · Back', rest:false, url:'#'},
+      {n:'Lower Hyp.',   d:'4x12 Legs · Core',  rest:false, url:'#'},
+      {n:'Conditioning', d:'3×20min HIIT',       rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+    ]
+  },
+  3: {
+    name: 'Accumulation',
+    type: 'Volume',
+    days: [
+      {n:'Upper Power',  d:'5x5 +2.5kg',        rest:false, url:'#'},
+      {n:'Lower Power',  d:'5x5 +5kg',           rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+      {n:'Upper Hyp.',   d:'4x12 Chest · Back', rest:false, url:'#'},
+      {n:'Lower Hyp.',   d:'4x12 Legs · Core',  rest:false, url:'#'},
+      {n:'Conditioning', d:'Tempo Run 30min',    rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+    ]
+  },
+  4: {
+    name: 'Deload',
+    type: 'Recovery',
+    days: [
+      {n:'Deload Upper', d:'3x5 @ 70%',        rest:false, url:'#'},
+      {n:'Deload Lower', d:'3x5 @ 70%',        rest:false, url:'#'},
+      {n:'',             d:'',                  rest:true},
+      {n:'Active',       d:'Mobility · Stretch',rest:false, url:'#'},
+      {n:'',             d:'',                  rest:true},
+      {n:'',             d:'',                  rest:true},
+      {n:'',             d:'',                  rest:true},
+    ]
+  },
+  5: {
+    name: 'Intensification',
+    type: 'Strength',
+    days: [
+      {n:'Upper Power',  d:'4x4 @ 82%',         rest:false, url:'#'},
+      {n:'Lower Power',  d:'4x4 @ 85%',          rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+      {n:'Upper Hyp.',   d:'4x8 Heavy',          rest:false, url:'#'},
+      {n:'Lower Hyp.',   d:'4x8 Heavy',          rest:false, url:'#'},
+      {n:'Conditioning', d:'Intervals 6×400m',   rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+    ]
+  },
+  6: {
+    name: 'Intensification +',
+    type: 'Strength',
+    days: [
+      {n:'Upper Power',  d:'4x3 @ 87%',         rest:false, url:'#'},
+      {n:'Lower Power',  d:'4x3 @ 90%',          rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+      {n:'Upper Hyp.',   d:'3x6 Heavy',          rest:false, url:'#'},
+      {n:'Lower Hyp.',   d:'3x6 Heavy',          rest:false, url:'#'},
+      {n:'Conditioning', d:'Intervals 8×400m',   rest:false, url:'#'},
+      {n:'',             d:'',                   rest:true},
+    ]
+  },
+  7: {
+    name: 'Peak',
+    type: 'Peaking',
+    days: [
+      {n:'Upper Power',  d:'3x2 @ 92%',     rest:false, url:'#'},
+      {n:'Lower Power',  d:'3x2 @ 93%',     rest:false, url:'#'},
+      {n:'',             d:'',              rest:true},
+      {n:'Upper Test',   d:'Max Effort',    rest:false, url:'#'},
+      {n:'Lower Test',   d:'Max Effort',    rest:false, url:'#'},
+      {n:'',             d:'',              rest:true},
+      {n:'',             d:'',              rest:true},
+    ]
+  },
+  8: {
+    name: 'Deload & Test',
+    type: 'Recovery',
+    days: [
+      {n:'Deload Upper', d:'3x3 @ 65%',      rest:false, url:'#'},
+      {n:'Deload Lower', d:'3x3 @ 65%',      rest:false, url:'#'},
+      {n:'',             d:'',               rest:true},
+      {n:'1RM Test',     d:'Bench · Squat',  rest:false, url:'#'},
+      {n:'1RM Test',     d:'RDL · OHP',      rest:false, url:'#'},
+      {n:'',             d:'',               rest:true},
+      {n:'',             d:'',               rest:true},
+    ]
+  },
+};
+
+/* ── Current week (1–8, 0 = not started) ── */
+var currentWeek = 1;
+
+function countSessions(wk){
+  return PROGRAM[wk].days.filter(function(d){return !d.rest;}).length;
+}
+
+function updateProgress(){
+  var fill = Math.round((currentWeek-1)/8*100);
+  document.getElementById('progFill').style.width = fill+'%';
+  document.getElementById('progTxt').textContent = 'Week '+(currentWeek-1)+' / 8';
+  if(currentWeek > 8) document.getElementById('doneBanner').classList.add('show');
+}
+
+function toggleWeek(wi){
+  var block = document.getElementById('week-'+wi);
+  var isOpen = block.classList.contains('open');
+  document.querySelectorAll('.prog-week').forEach(function(w){w.classList.remove('open');});
+  if(!isOpen) block.classList.add('open');
+}
+
+function goToWorkout(url){
+  if(url && url !== '#') window.location.href = url;
+}
+
+var html = '';
+for(var w=1;w<=8;w++){
+  var wk = PROGRAM[w];
+  var sessions = countSessions(w);
+  var isDone = w < currentWeek;
+  var isActive = w === currentWeek;
+  var cls = 'prog-week'+(isDone?' week-done':'')+(isActive?' week-active':'');
+  var badge = wk.type;
+
+  html += '<div class="'+cls+'" id="week-'+w+'">';
+  html += '<div class="prog-week-hd" onclick="toggleWeek('+w+')">';
+  html += '<div class="prog-week-left">';
+  html += '<div class="prog-week-num">W'+w+'</div>';
+  html += '<div><div class="prog-week-name">'+wk.name+'</div>';
+  html += '<div class="prog-week-meta">'+sessions+' sessions'+(isDone?' · done':'')+(isActive?' · current':'')+'</div></div>';
+  html += '</div>';
+  html += '<div class="prog-week-right">';
+  html += '<span class="prog-week-badge">'+badge+'</span>';
+  html += '<span class="prog-week-arrow">▾</span>';
+  html += '</div></div>';
+
+  html += '<div class="prog-week-body"><div class="prog-days">';
+  wk.days.forEach(function(day, di){
+    var dayCls = 'prog-day'+(day.rest?' day-rest':'');
+    var onclick = (!day.rest && day.url) ? 'onclick="goToWorkout(\''+day.url+'\')"' : '';
+    html += '<div class="'+dayCls+'" '+onclick+'>';
+    html += '<div class="prog-day-name">'+DAYS[di]+'</div>';
+    if(!day.rest){
+      html += '<div class="prog-day-dot"></div>';
+      html += '<div class="prog-day-workout">'+day.n+'</div>';
+      html += '<div class="prog-day-detail">'+day.d+'</div>';
+      if(day.url && day.url !== '#') html += '<span class="prog-day-link">open →</span>';
+    } else {
+      html += '<div class="prog-day-rest-lbl">rest</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div></div></div>';
+}
+
+document.getElementById('weeks').innerHTML = html;
+document.getElementById('week-'+currentWeek).classList.add('open');
+updateProgress();
+</script>
+</body>
+</html>
