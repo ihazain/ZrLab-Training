@@ -1,0 +1,398 @@
+{
+  "program": {
+    "label": "ZR Lab · Weighted Calisthenics",
+    "title": "Training Plan 2025",
+    "description": "Weighted Calisthenics + Triathlon Athletics. Upper/Lower Split mit Strength und Hypertrophy Periodisierung. 5 Sessions pro Woche.",
+    "weeks": 8,
+    "sessions_per_week": 5,
+    "focus": "Strength",
+    "focus_sub": "+ Hypertrophy",
+    "current_week": 2
+  },
+  "weeks": {
+    "1": {
+      "name": "Intro · Strength",
+      "type": "Strength",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "Weighted Pull Ups · Rows · Dips",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "Squat · Hip Thrust · Pistol",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Shoulders & Arms",
+          "detail": "Military Press · Curls · Ext.",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "Upper B",
+          "detail": "Pull Ups · One Arm Row · Dips",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower B",
+          "detail": "RDL · Hip Thrust · Lunges",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "2": {
+      "name": "Strength +",
+      "type": "Strength",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "Weighted Pull Ups +2.5kg",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "Squat +5kg · Hip Thrust",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Shoulders & Arms",
+          "detail": "Military Press +2.5kg",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "Upper B",
+          "detail": "Pull Ups Reps PR",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower B",
+          "detail": "RDL +5kg · Lunges",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "3": {
+      "name": "Accumulation",
+      "type": "Volume",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "Weighted Pull Ups +5kg",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "Squat +7.5kg · Pistol Prog.",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Shoulders & Arms",
+          "detail": "Military Press +5kg",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "Upper B",
+          "detail": "4x12 High Volume",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower B",
+          "detail": "RDL +7.5kg · Nordic Curl",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "4": {
+      "name": "Deload",
+      "type": "Recovery",
+      "days": [
+        {
+          "name": "Upper Deload",
+          "detail": "3x5 @ 70% · Technik",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower Deload",
+          "detail": "3x5 @ 70% · Mobility",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Active Recovery",
+          "detail": "Mobility · Stretch · Foam",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "5": {
+      "name": "Intensification",
+      "type": "Strength",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "Weighted Pull Ups +7.5kg",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "Squat 4x4 @ 87%",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Shoulders & Arms",
+          "detail": "Military Press 4x4",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "Upper B",
+          "detail": "4x8 Heavy DB Press",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower B",
+          "detail": "RDL 4x8 Heavy",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "6": {
+      "name": "Intensification +",
+      "type": "Strength",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "Weighted Pull Ups +10kg",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "Squat 4x3 @ 90%",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Shoulders & Arms",
+          "detail": "Military Press 4x3",
+          "rest": false,
+          "url": "#shoulders-arms"
+        },
+        {
+          "name": "Upper B",
+          "detail": "3x6 Heavy",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower B",
+          "detail": "RDL 3x6 Heavy",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "7": {
+      "name": "Peak",
+      "type": "Peaking",
+      "days": [
+        {
+          "name": "Upper A",
+          "detail": "3x2 @ 92% · Max Effort",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower A",
+          "detail": "3x2 @ 93% · Squat",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Upper Test",
+          "detail": "Max Reps Pull Ups · Dips",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Lower Test",
+          "detail": "Max Effort Squat",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    },
+    "8": {
+      "name": "Deload & Test",
+      "type": "Recovery",
+      "days": [
+        {
+          "name": "Upper Deload",
+          "detail": "3x3 @ 65% · Technik",
+          "rest": false,
+          "url": "#upper-a"
+        },
+        {
+          "name": "Lower Deload",
+          "detail": "3x3 @ 65%",
+          "rest": false,
+          "url": "#lower-a"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "Max Test",
+          "detail": "Pull Ups · Dips · Squat",
+          "rest": false,
+          "url": "#upper-b"
+        },
+        {
+          "name": "Max Test",
+          "detail": "RDL · Hip Thrust · Press",
+          "rest": false,
+          "url": "#lower-b"
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        },
+        {
+          "name": "",
+          "detail": "",
+          "rest": true,
+          "url": ""
+        }
+      ]
+    }
+  }
+}
